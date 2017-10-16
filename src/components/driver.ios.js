@@ -21,14 +21,12 @@ import * as AuthAction from '../actions/auth';
 
 import { Colors, Device, FontSize, PaddingSize } from '../lib/device-info';
 
-import Drawer from 'react-native-drawer';
-import MyControlPanel from './ControlPanel';
-import tweens from './tweens';
-
-import menuImg from '../assets/menu.png';
-
+import logoImg from '../assets/logo.png';
+import carImg from '../assets/car.png';
 import { menuItems } from '../data.service';
 
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 // map redux store to props
 function mapStateToProps(state) {
@@ -52,161 +50,143 @@ class Driver extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-          drawerType: 'overlay',
-          openDrawerOffset:100,
-          closedDrawerOffset:0,
-          panOpenMask: .1,
-          panCloseMask: .9,
-          relativeDrag: false,
-          panThreshold: .25,
-          tweenHandlerOn: false,
-          tweenDuration: 350,
-          tweenEasing: 'linear',
-          disabled: false,
-          tweenHandlerPreset: null,
-          acceptDoubleTap: false,
-          acceptTap: false,
-          acceptPan: true,
-          tapToClose: false,
-          negotiatePan: false,
-          side: "right",
-          selected: -1
+          selected: -1,
         };
     }
-
-    setDrawerType(type){
-        this.setState({
-            drawerType: type
-        })
-    }
-
-    tweenHandler(ratio){
-        if(!this.state.tweenHandlerPreset){ return {} }
-        return tweens[this.state.tweenHandlerPreset](ratio)
-    }
-
-    noopChange(){
-        this.setState({
-            changeVal: Math.random()
-        })
-    }
-
-    openDrawer(){
-        this.drawer.open()
-    }
-
-    setStateFrag(frag) {
-        this.setState(frag);
-    }
-
     render() {
-        var controlPanel = <MyControlPanel closeDrawer={() => {
-            this.drawer.close();
-        }} />
+
         return (
-            
-        <Drawer
-        ref={c => this.drawer = c}
-        type={this.state.drawerType}
-        animation={this.state.animation}
-        openDrawerOffset={this.state.openDrawerOffset}
-        closedDrawerOffset={this.state.closedDrawerOffset}
-        panOpenMask={this.state.panOpenMask}
-        panCloseMask={this.state.panCloseMask}
-        relativeDrag={this.state.relativeDrag}
-        panThreshold={this.state.panThreshold}
-        content={controlPanel}
-        styles={drawerStyles}
-        disabled={this.state.disabled}
-        tweenHandler={this.tweenHandler.bind(this)}
-        tweenDuration={this.state.tweenDuration}
-        tweenEasing={this.state.tweenEasing}
-        acceptDoubleTap={this.state.acceptDoubleTap}
-        acceptTap={this.state.acceptTap}
-        acceptPan={this.state.acceptPan}
-        tapToClose={this.state.tapToClose}
-        negotiatePan={this.state.negotiatePan}
-        changeVal={this.state.changeVal}
-        side={this.state.side}
-        >  
             <View style={styles.drawer}>
                 <View style={styles.header} key={0}>
                     
-                    <Icon name="search" size={50} color="#fff" />
+                    <Image source={logoImg}
+							style={styles.inlineImg} />
                     
                     <View style={styles.headerInfo} key={1}>
                         <Text style={styles.headerTitle} key={0}>
-                        PICK A DRIVER?
+                        Welcome passenger
                         </Text>
                     </View>
-                    <TouchableHighlight
-                        underlayColor="#B5B5B5"
-                        onPress={() => {
-                        this.openDrawer();
-                    }}>
-                        <Image source={menuImg}
-							style={styles.inlineImg} />    
-                    </TouchableHighlight>
                 </View>
                 <View style={styles.content} key={1}>
-                    <ScrollView>
+                    <View style={styles.scrollHeader}>
+                        
+                        <Image source={carImg}
+                                style={styles.inlineImgCar} />
+                        
+                        <View style={styles.headerInfo} key={1}>
+                            <Text style={styles.driverInput} key={0}>
+                            Pick a driver
+                            </Text>
+                        </View>
+                        
+                    </View>
+                    <View style={styles.line}>
+                    </View>
+                    <ScrollView style={styles.scroll}>
                         {menuItems.map((item, idx) => (
-                        <TouchableOpacity
-                            key={idx}
-                            style={styles.listItem}
-                            onPress={() => this.setState({selected:idx})}
-                        >
-                            <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
-                            <Text style={[styles.listItemTitle, {color: this.state.selected == idx ?'red' :'white'}]}>{item.label}</Text>
-                        </TouchableOpacity>
+                            <View style={styles.driverinfoP}>
+                                <View style={styles.driverinfo}>
+                                    <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
+                                    <View style={styles.listItemInfo}>
+                                        <Text style={styles.listItemName}>Paige Hawkins</Text>
+                                        <Text style={styles.listItemJob}>Sophomore Mechanical Engineering</Text>
+                                        <Text style={styles.listItemMail}>p.hawkins2016@gmail.com</Text>
+                                        <Text style={styles.listItemPhone}>240-997-2231</Text>
+                                        <Text style={styles.listItemComment}>The saddest thing in life is wasted talent</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.line}>
+                                </View>
+                            </View>
+                        
                         ))}
                     </ScrollView>
                 </View>
-                <View style={styles.header} key={2}>
+                {/* <View style={styles.header} key={2}>
                     <TouchableHighlight
                         underlayColor="#B5B5B5"
                         onPress={() => Actions.driver()}
                     >
                         <Text style={styles.headerTitle}>Next</Text>    
                     </TouchableHighlight>
-                </View>
+                </View> */}
             </View>
-        </Drawer>    
+
             
         );
     }
 }
 
-  
-  const drawerStyles = {
-    drawer: {
-      shadowColor: "#000000",
-      shadowOpacity: 0.8,
-      shadowRadius: 0,
-    }
-  }
+
+
   const styles = StyleSheet.create({
     drawer: {
       flex: 1,
-      backgroundColor: '#1E88E5'
+      backgroundColor: '#f1f4f4'
     },
     header: {
       
       flex: 1,
       padding: 16,
-      backgroundColor: '#1565C0',
       flexDirection: 'row',
-      justifyContent:'space-around',
+      justifyContent:'space-between',
       alignItems:'center',
+      
+    },
+    scrollHeader: {
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        paddingBottom:10,
+      },
+    line: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#94d9f6',
+        width:DEVICE_WIDTH*3/4,
+        marginBottom: 10,
+    },
+    scroll: {
+        backgroundColor: '#dcdcdf',
+        paddingTop: 10,
+        marginBottom: 20
     },
     content: {
-      flex: 8,
-      padding: 16,
-      backgroundColor: '#1E88E5'
+      justifyContent:'center',
+      alignItems:'center',
+      flex: 10,
     },
     headerTitle: {
-      color: '#fff',
-      fontSize: 30
+      fontSize: 20,
+      borderWidth: 1,
+      borderColor: '#4472c4',
+      paddingLeft: 5,
+      paddingTop: 5,
+      backgroundColor: '#c2c2c2',
+    },
+    driverInput: {
+        fontSize: 20,
+        borderWidth: 2,
+        borderColor: '#a7a7a7',
+        paddingLeft: 5,
+        paddingTop: 5,
+        backgroundColor: 'white',
+        width: DEVICE_WIDTH*2/3,
+        marginLeft: 30,
+      },
+    driverinfo: {
+        flexDirection:'row',
+        paddingTop: 0,
+        marginBottom: 10,
+        marginTop: 0,
+        alignItems: 'center',
+    },
+    driverinfoP: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 15,
+        marginRight: 15
     },
     listItem: {
       flexDirection: 'row',
@@ -218,20 +198,55 @@ class Driver extends Component {
     listItemTitle: {
       fontSize: 18,
       flexShrink: 1,
-      color: '#fff'
     },
     listItemImage: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
+      width: DEVICE_WIDTH/7,
+      height: DEVICE_WIDTH/7,
       marginRight: 10,
+      resizeMode: 'stretch'
     },
+    listItemInfo: {
+        width: DEVICE_WIDTH*9/13,
+        borderWidth: 3,
+        borderColor: '#ff9300',
+        borderRadius: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: 'white'
+      },
     inlineImg: {
-		width: 30,
-		height: 30,
+		width: 100,
+        height: 30,
+        resizeMode: 'stretch'
+    },
+    inlineImgCar: {
+		width: 40,
+        height: 40,
+        resizeMode: 'stretch'
+    },
+    listItemName: {
+        color: '#838787',
+        fontSize: 16,
+    },
+    listItemJob: {
+		color: '#212121',
+        fontSize: 13,
+    },
+    listItemMail: {
+		color: '#9ad2ed',
+        fontSize: 12,
+    },
+    listItemPhone: {
+		color: '#7e57c2',
+        fontSize: 12,
+    },
+    listItemComment: {
+		color: '#212121',
+        fontSize: 12,
     },
     next: {
-        color: '#fff',
         fontSize: 30
     },
   });

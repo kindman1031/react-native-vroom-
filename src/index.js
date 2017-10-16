@@ -45,12 +45,14 @@ export default class popuppin extends Component {
             <Router createReducer={reducerCreate}>
                 
                 <Scene key="root">
-                    <Scene key="login" component={Login} hideNavBar={true} intial/>
+                <Scene key="login" component={Login} hideNavBar={true} intial/>
+                    <Scene key="driver" component={Driver} hideNavBar={true}/>
+                    
                     <Scene key="home" component={Home} hideNavBar={true} />
                     
                     <Scene key="signup" component={Signup} hideNavBar={true} />
                     <Scene key="forgot" component={Forgot} hideNavBar={true} />
-                    <Scene key="driver" component={Driver} hideNavBar={true} />
+                    
                     <Scene key="music" component={RNDrawerDemo} hideNavBar={true} />
                 </Scene>
             </Router>
