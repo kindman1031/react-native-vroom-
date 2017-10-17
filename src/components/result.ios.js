@@ -22,8 +22,7 @@ import * as AuthAction from '../actions/auth';
 import { Colors, Device, FontSize, PaddingSize } from '../lib/device-info';
 
 import logoImg from '../assets/logo.png';
-import carImg from '../assets/car.png';
-import nextImg from '../assets/next.png';
+import { menuItems } from '../data.service';
 import MapView from 'react-native-maps';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -47,7 +46,7 @@ function mapDispatchToProps(dispatch) {
 
 
 
-class Home extends Component {
+class Result extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,18 +64,6 @@ class Home extends Component {
             // If there are no new values set the current ones
             lastLat: lastLat || this.state.lastLat,
             lastLong: lastLong || this.state.lastLong
-        });
-    }
-    onMapPress(e) {
-        let region = {
-          latitude:       e.nativeEvent.coordinate.latitude,
-          longitude:      e.nativeEvent.coordinate.longitude,
-        }
-        this.setState({
-            pressed_mapRegion: region,
-            // If there are no new values set the current ones
-            pressed_lastLat: region.latitude || this.state.pressed_lastLat,
-            pressed_lastLong: region.longitude || this.state.pressed_lastLong
         });
     }
     componentDidMount() {
@@ -105,7 +92,6 @@ class Home extends Component {
 							style={styles.inlineImg} />
                     
                     <View style={styles.headerInfo} key={1}>
-                        
                         <Text style={styles.headerTitle} key={0}>
                         Welcome passenger
                         </Text>
@@ -114,9 +100,7 @@ class Home extends Component {
                 <View style={styles.scrollHeader}>
                         
                         <View style={styles.vrsoundtitle}>
-                            <Image source={carImg}
-                                style={styles.inlineImgCar} />
-                            <TextInput style={styles.choice} placeholder='Where are you going?'></TextInput>
+                            <Text style={styles.choice}>We are on our way</Text>
                         </View>
                         <View style={styles.line}>
                         </View>  
@@ -130,7 +114,6 @@ class Home extends Component {
                     showsUserLocation={true}
                     followUserLocation={true}
                     onRegionChange={this.onRegionChange.bind(this)}
-                    onPress = {this.onMapPress.bind(this)}
                     >
                         <MapView.Marker
                         coordinate={{
@@ -150,14 +133,7 @@ class Home extends Component {
                     </MapView>
                     
                 </View>
-                <View style={styles.bottom} key={2}>
-                    <TouchableOpacity
-                        onPress={() => Actions.driver()}
-                    >
-                        <Image source={nextImg}
-							style={styles.next} />   
-                    </TouchableOpacity>
-                </View> 
+
             </View>
 
             
@@ -203,7 +179,7 @@ class Home extends Component {
         borderBottomColor: '#94d9f6',
         width:DEVICE_WIDTH*3/4,
         marginBottom: 10,
-        marginTop: 2,
+        marginTop: 10,
     },
     content: {
       justifyContent:'center',
@@ -219,42 +195,23 @@ class Home extends Component {
       backgroundColor: '#c2c2c2',
     },
     vrsoundtitle: {
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
         marginTop: 10,
         width: DEVICE_WIDTH*9/10,
+        borderWidth: 3,
+        borderColor: '#ff9300',
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: 'white',
         paddingTop: 1,
         paddingBottom: 1,
         paddingTop: 5,
-        paddingBottom: 5,
-        backgroundColor: '#f1f4f4',
+        paddingBottom: 5
     },
     inlineImg: {
 		width: 100,
         height: 25,
         resizeMode: 'stretch'
     },
-    choice: {
-        backgroundColor: '#f1f4f4',
-        fontSize: 16,
-    },
-    inlineImgCar: {
-		width: 50,
-        height: 40,
-        resizeMode: 'stretch',
-        marginRight: 20,
-    },
-    next: {
-        width: 100,
-        height: 25,
-        resizeMode: 'stretch',
-        marginRight: 20
-    },
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Result);

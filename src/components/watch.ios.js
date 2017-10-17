@@ -22,8 +22,8 @@ import * as AuthAction from '../actions/auth';
 import { Colors, Device, FontSize, PaddingSize } from '../lib/device-info';
 
 import logoImg from '../assets/logo.png';
-import carImg from '../assets/graph.png';
-import nextImg from '../assets/submit.png';
+import carImg from '../assets/watch.png';
+import nextImg from '../assets/next.png';
 import starImg from '../assets/star.png';
 import { menuItems } from '../data.service';
 
@@ -48,7 +48,7 @@ function mapDispatchToProps(dispatch) {
 
 
 
-class Music extends Component {
+class Watch extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -78,15 +78,12 @@ class Music extends Component {
                         
                         <View style={styles.headerInfo} key={1}>
                             <Text style={styles.driverInput} key={0}>
-                            Pick your music?
+                            What are you watching?
                             </Text>
                         </View>
                         
                     </View>
                     <View style={styles.line}>
-                    </View>
-                    <View style={styles.vrsoundtitle}>
-                            <Text style={styles.choice}>VR Soundtrack(Accompanying Track)</Text>
                     </View>
                     <ScrollView style={styles.scroll}>
                         {menuItems.map((item, idx) => (
@@ -98,9 +95,15 @@ class Music extends Component {
                                     
                                         <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
                                         <View style={[styles.listItemInfo, {backgroundColor: this.state.selected == idx ?'yellow' :'white'}]}>
-                                            <Text style={styles.listItemName}>Paige Hawkins</Text>
-                                            <Text style={styles.listItemSubtitle}>Sophomore Mechanical Engineering</Text>
-                                            <Text style={styles.listItemDes}>Engineering Engineering Engineering Engineering Engineering Engineering Engineering</Text>
+                                            <Text style={styles.listItemJob}>The blue</Text>
+                                            <Text style={styles.listItemMail}>p.hawkins2016</Text>
+                                            <View style={{flexDirection:'row'}}>
+                                                <Image source={ starImg } style={styles.star} />
+                                                <Image source={ starImg } style={styles.star} />
+                                                <Image source={ starImg } style={styles.star} />
+                                                <Image source={ starImg } style={styles.star} />
+                                                <Image source={ starImg } style={styles.star} />
+                                            </View>
                                         </View>
                                         
                                     </View>
@@ -124,7 +127,7 @@ class Music extends Component {
                 </View>
                 <View style={styles.bottom} key={2}>
                     <TouchableOpacity
-                        onPress={() => Actions.result()}
+                        onPress={() => Actions.music()}
                     >
                         <Image source={nextImg}
 							style={styles.next} />   
@@ -225,25 +228,28 @@ class Music extends Component {
       fontSize: 18,
       flexShrink: 1,
     },
+    listItemImage: {
+      width: DEVICE_WIDTH*2/6,
+      height: DEVICE_WIDTH/6,
+      marginRight: 10,
+      resizeMode: 'stretch'
+    },
     star: {
         width: 10,
         height: 10,
         resizeMode: 'stretch'
       },
-      listItemImage: {
-        width: DEVICE_WIDTH/7,
-        height: DEVICE_WIDTH/7,
-        marginRight: 10,
-        resizeMode: 'stretch'
+    listItemInfo: {
+        width: DEVICE_WIDTH*7/13,
+        borderWidth: 3,
+        borderColor: '#ff9300',
+        borderRadius: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: 'white',
+        paddingTop: 10,
+        paddingBottom: 10
       },
-      listItemInfo: {
-          width: DEVICE_WIDTH*9/13,
-          paddingLeft: 10,
-          paddingRight: 10,
-          paddingTop: 5,
-          paddingBottom: 5,
-          backgroundColor: 'white'
-        },
     driverSelect: {
         marginTop: 10,
         width: DEVICE_WIDTH*9/10,
@@ -253,22 +259,7 @@ class Music extends Component {
         paddingRight: 10,
         backgroundColor: 'white',
         paddingTop: 1,
-        paddingBottom: 1,
-        paddingTop: 5,
-        paddingBottom: 5
-    },
-    vrsoundtitle: {
-        marginTop: 10,
-        width: DEVICE_WIDTH*9/10,
-        borderWidth: 3,
-        borderColor: '#ff9300',
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: 'white',
-        paddingTop: 1,
-        paddingBottom: 1,
-        paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 1
     },
     inlineImg: {
 		width: 100,
@@ -276,25 +267,25 @@ class Music extends Component {
         resizeMode: 'stretch'
     },
     inlineImgCar: {
-		width: 40,
-        height: 40,
+		width: 60,
+        height: 30,
         resizeMode: 'stretch'
     },
-    listItemName: {
-        color: 'black',
-        fontSize: 14,
+    listItemJob: {
+		color: '#838787',
+        fontSize: 13,
     },
-    listItemSubtitle: {
+    listItemMail: {
 		color: '#838787',
         fontSize: 12,
     },
-    listItemDes: {
-		color: 'black',
+    listItemPhone: {
+		color: '#838787',
         fontSize: 12,
     },
     choice: {
         color: '#838787',
-        fontSize: 16,
+        fontSize: 20,
     },
     next: {
         width: 100,
@@ -304,4 +295,4 @@ class Music extends Component {
     },
   });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Music);
+export default connect(mapStateToProps, mapDispatchToProps)(Watch);

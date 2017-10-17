@@ -23,6 +23,7 @@ import { Colors, Device, FontSize, PaddingSize } from '../lib/device-info';
 
 import logoImg from '../assets/logo.png';
 import carImg from '../assets/car.png';
+import nextImg from '../assets/next.png';
 import { menuItems } from '../data.service';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -85,17 +86,23 @@ class Driver extends Component {
                     </View>
                     <ScrollView style={styles.scroll}>
                         {menuItems.map((item, idx) => (
-                            <View style={styles.driverinfoP}>
-                                <View style={styles.driverinfo}>
-                                    <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
-                                    <View style={styles.listItemInfo}>
-                                        <Text style={styles.listItemName}>Paige Hawkins</Text>
-                                        <Text style={styles.listItemJob}>Sophomore Mechanical Engineering</Text>
-                                        <Text style={styles.listItemMail}>p.hawkins2016@gmail.com</Text>
-                                        <Text style={styles.listItemPhone}>240-997-2231</Text>
-                                        <Text style={styles.listItemComment}>The saddest thing in life is wasted talent</Text>
+                            <View style={styles.driverinfoP} key={idx}>
+                                <TouchableOpacity
+                                        onPress={() => this.setState({selected:idx})}
+                                    >
+                                    <View style={styles.driverinfo}>
+                                    
+                                        <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
+                                        <View style={[styles.listItemInfo, {backgroundColor: this.state.selected == idx ?'yellow' :'white'}]}>
+                                            <Text style={styles.listItemName}>Paige Hawkins</Text>
+                                            <Text style={styles.listItemJob}>Sophomore Mechanical Engineering</Text>
+                                            <Text style={styles.listItemMail}>p.hawkins2016@gmail.com</Text>
+                                            <Text style={styles.listItemPhone}>240-997-2231</Text>
+                                            <Text style={styles.listItemComment}>The saddest thing in life is wasted talent</Text>
+                                        </View>
+                                        
                                     </View>
-                                </View>
+                                </TouchableOpacity> 
                                 <View style={styles.line}>
                                 </View>
                             </View>
@@ -103,14 +110,14 @@ class Driver extends Component {
                         ))}
                     </ScrollView>
                 </View>
-                {/* <View style={styles.header} key={2}>
-                    <TouchableHighlight
-                        underlayColor="#B5B5B5"
-                        onPress={() => Actions.driver()}
+                <View style={styles.bottom} key={2}>
+                    <TouchableOpacity
+                        onPress={() => Actions.watch()}
                     >
-                        <Text style={styles.headerTitle}>Next</Text>    
-                    </TouchableHighlight>
-                </View> */}
+                        <Image source={nextImg}
+							style={styles.next} />   
+                    </TouchableOpacity>
+                </View>
             </View>
 
             
@@ -134,6 +141,14 @@ class Driver extends Component {
       alignItems:'center',
       
     },
+    bottom: {
+        
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent:'flex-end',
+        alignItems:'center',
+        
+      },
     scrollHeader: {
         flexDirection: 'row',
         justifyContent:'space-between',
@@ -149,7 +164,7 @@ class Driver extends Component {
     scroll: {
         backgroundColor: '#dcdcdf',
         paddingTop: 10,
-        marginBottom: 20
+        marginBottom: 0
     },
     content: {
       justifyContent:'center',
@@ -218,11 +233,11 @@ class Driver extends Component {
       },
     inlineImg: {
 		width: 100,
-        height: 30,
+        height: 25,
         resizeMode: 'stretch'
     },
     inlineImgCar: {
-		width: 40,
+		width: 50,
         height: 40,
         resizeMode: 'stretch'
     },
@@ -247,7 +262,10 @@ class Driver extends Component {
         fontSize: 12,
     },
     next: {
-        fontSize: 30
+        width: 100,
+        height: 25,
+        resizeMode: 'stretch',
+        marginRight: 20
     },
   });
 

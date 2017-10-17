@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import * as AuthAction from '../actions/auth';
 
 // import bgSrc from '../assets/light-bg.jpg';
-// import logoImg from '../assets/logo2.png';
+import logoImg from '../assets/logo.png';
 import usernameImg from '../assets/username.png';
 import passwordImg from '../assets/password.png';
 
@@ -57,22 +57,23 @@ class Login extends Component {
 	  }
 	
 	  login(email, password) {
-		if(email==null || email==''){			
-			alert("email is required");
-		}
-		else if(password==null || password==''){			
-			alert("Password is required");
-		}
-		else if(password.length<6){
-			alert("Password must be at least 6 characters");
-		}		
-		else{
-			Actions.home();
-			// this.setState({isBusy:true});
-			// this.props.actions.Auth.login(email, password, () => {
-			// 	this.setState({isBusy: false});
-			// })
-		}
+		Actions.home();
+		// if(email==null || email==''){			
+		// 	alert("email is required");
+		// }
+		// else if(password==null || password==''){			
+		// 	alert("Password is required");
+		// }
+		// else if(password.length<6){
+		// 	alert("Password must be at least 6 characters");
+		// }		
+		// else{
+		// 	Actions.home();
+		// 	// this.setState({isBusy:true});
+		// 	// this.props.actions.Auth.login(email, password, () => {
+		// 	// 	this.setState({isBusy: false});
+		// 	// })
+		// }
 		
 	  }
 
@@ -80,37 +81,23 @@ class Login extends Component {
 		return (
 			<View style={styles.picture}>
 				<View style={styles.logo_container}>
+					<Image resizeMode = 'stretch' source={logoImg} style={styles.logoImg}/>
 				</View>
 				
 				<KeyboardAvoidingView behavior='padding'
 					style={styles.form_container}>
-					<View style={styles.inputWrapper}>
-						<Image source={usernameImg}
-							style={styles.inlineImg} />
-						<TextInput style={styles.form_input}
-							value={this.state.username}
-							placeholder='Email'
-							autoCorrect={false}
-							autoCapitalize='none'
-							returnKeyType='done'
-							placeholderTextColor='white'
-							underlineColorAndroid='transparent' 
-							onChangeText={(value) => this.setState({username: value})}/>
-					</View>
 					
-					<View style={styles.inputWrapper}>
-						<Image source={passwordImg}
-							style={styles.inlineImg} />
-						<TextInput style={styles.form_input}
-							value={this.state.password}
+						<TextInput style={styles.email}
+							placeholder='Email'
+						/>
+				
+					
+					
+						<TextInput style={styles.pass}
 							secureTextEntry={true}
 							placeholder='Password'
-							autoCorrect={false}
-							autoCapitalize='none'
-							returnKeyType='done'
-							placeholderTextColor='white'
-							onChangeText={(value) => this.setState({password: value})} />
-					</View>
+						/>
+					
 					
 				</KeyboardAvoidingView>
 				
@@ -131,11 +118,7 @@ class Login extends Component {
 					
 				</View>
 				<View style={styles.forgot_container}>
-					<TouchableOpacity onPress={() => Actions.forgot()}>
-						
-						<Text style={styles.forgot_text}>Forgot Password?</Text>
-						
-					</TouchableOpacity>
+					
 					
 				</View>
 				{
@@ -232,6 +215,26 @@ const styles = StyleSheet.create({
 		color: 'white',
 		backgroundColor: 'transparent',
 	},
+	logoImg: {
+		width: DEVICE_WIDTH * 0.7,
+		height: 80
+	},
+	email: {
+		marginTop: 10,
+        width: DEVICE_WIDTH*0.8,
+		height: 40,
+		borderWidth: 1,
+		borderColor: '#ff9300',
+		alignSelf: 'center'
+	},
+	pass: {
+		marginTop: 10,
+        width: DEVICE_WIDTH*0.8,
+		height: 40,
+		borderWidth: 1,
+		borderColor: '#ff9300',
+		alignSelf: 'center'
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
