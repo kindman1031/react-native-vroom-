@@ -13,6 +13,7 @@ import Driver from './components/driver';
 import Music from './components/music';
 import Watch from './components/watch';
 import Result from './components/result';
+import DriverHome from './components/driverHome';
 
 // map redux store to props
 function mapStateToProps(state) {
@@ -47,20 +48,13 @@ export default class popuppin extends Component {
                 
                 <Scene key="root">
                     <Scene key="login" component={Login} hideNavBar={true} intial/>
+                    <Scene key="driverHome" component={DriverHome} hideNavBar={true}/>
+                    
                     <Scene key="home" component={Home} hideNavBar={true}/>
                     <Scene key="result" component={Result} hideNavBar={true}/>
-                    <Scene key="login" component={Login} hideNavBar={true}/>
-                    
                     <Scene key="driver" component={Driver} hideNavBar={true}/>
                     <Scene key="watch" component={Watch} hideNavBar={true}/>
-                    
-                    
-                    
-                    
-                    
-                    
                     <Scene key="signup" component={Signup} hideNavBar={true} />
-                    
                     <Scene key="music" component={Music} hideNavBar={true} />
                     
                 </Scene>
