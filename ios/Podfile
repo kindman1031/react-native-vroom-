@@ -1,0 +1,29 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'startup' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+  # Required by RNFirebase
+  pod 'Firebase/Core'
+  # Pods for startup
+  
+  target 'startupTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'startup-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for startup-tvOS
+
+  target 'startup-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
