@@ -15,6 +15,10 @@ import Watch from './components/watch';
 import Result from './components/result';
 import DriverHome from './components/driverHome';
 
+import * as firebase from 'firebase';
+import config from './lib/config';
+const fierbaseApp = firebase.initializeApp(config.firebaseConfig);
+// firebase.initializeApp(config.firebaseConfig);
 // map redux store to props
 function mapStateToProps(state) {
     return {

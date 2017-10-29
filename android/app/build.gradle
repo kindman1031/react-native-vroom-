@@ -133,6 +133,9 @@ android {
 }
 
 dependencies {
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
     compile project(':react-native-maps')
     compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')

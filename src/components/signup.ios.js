@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
     TouchableHighlight,
+    ActivityIndicator
 } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -54,8 +55,73 @@ class Signup extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+          isBusy: false,
           selected: 1,
+          firstnameD: "",
+          lastnameD: "",
+          titleD: "",
+          majorD: "",
+          emailD: "",
+          phoneD: "",
+          passD: "",
+          confirmD: "",
+          firstnameP: "",
+          lastnameP: "",
+          titleP: "",
+          majorP: "",
+          emailP: "",
+          phoneP: "",
+          passP: "",
+          confirmP: "",
+          role: "Driver",
         };
+    }
+    componentDidMount() {
+		this.setState({isBusy: false});
+	}
+	
+    signup() {
+        if(this.state.role=="Passenger"){
+            if(this.state.emailP==null || this.state.emailP==''){			
+                alert("email is required");
+            }
+            else if(this.state.firstnameP==null || this.state.firstnameP==''){			
+                alert("First Name is required");
+            }
+            else if(this.state.lastnameP==null || this.state.lastnameP==''){			
+                alert("Last Name is required");
+            }
+            else if(this.state.titleP==null || this.state.titleP==''){			
+                alert("Title is required");
+            }
+            else if(this.state.majorP==null || this.state.majorP==''){			
+                alert("Major is required");
+            }
+            else if(this.state.phoneP==null || this.state.phoneP==''){			
+                alert("Phone is required");
+            }
+            else if(this.state.passP==null || this.state.passP==''){			
+                alert("Password is required");
+            }
+            else if(this.state.passP.length<6){
+                alert("Password must be at least 6 characters");
+            }	
+            else if(this.state.passP!=this.state.confirmP){
+                alert("Please confirm your password again.");
+            }		
+            else{
+                this.setState({isBusy:true});
+                this.props.actions.Auth.signupaspassenger(this.state.firstnameP, this.state.lastnameP, this.state.titleP, this.state.majorP, this.state.emailP, this.state.phoneP, this.state.passP, () => {
+                    this.setState({isBusy: false});
+                    alert("success");
+                })
+            }
+        }
+        else{
+
+        }
+        
+    
     }
     render() {
 
@@ -85,7 +151,7 @@ class Signup extends Component {
 			
 				</View>
 				<TouchableOpacity
-						onPress={() => this.setState({selected:1})}
+						onPress={() => this.setState({selected:1, role:"Driver"})}
 					>
 					<View style={styles.scrollHeader}>
 						
@@ -114,7 +180,7 @@ class Signup extends Component {
 			
 				</View>
 				<TouchableOpacity
-						onPress={() => this.setState({selected:2})}
+						onPress={() => this.setState({selected:2, role:"Passenger"})}
 					>
 					<View style={styles.scrollHeader}>
 						
@@ -133,34 +199,75 @@ class Signup extends Component {
 						<View style={{flexDirection:'row'}}>
 							<TextInput style={styles.firstname}
 									placeholder='First Name'
+                                    value={this.state.firstname}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({firstname: value})}
 							/>
 							<TextInput style={styles.lastname}
-								placeholder='Last Name'
+                                    placeholder='Last Name'
+                                    value={this.state.lastname}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({lastname: value})}
 							/>
 						</View>
-						<View style={{flexDirection:'row', marginTop: 10}}>
+                        <View style={{flexDirection:'row', marginTop: 10}}>
 							<TextInput style={styles.title}
-							placeholder='Title'
+							        placeholder='Title'
+                                    value={this.state.title}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({title: value})}
 							/>
 							<TextInput style={styles.major}
-								placeholder='Major or Dept'
+								    placeholder='Major or Dept'
+                                    value={this.state.major}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({major: value})}
 							/>
 						</View>
 						<View style={{flexDirection:'row', marginTop: 10}}>
 							<TextInput style={styles.email}
 									placeholder='Email'
+                                    value={this.state.email}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({email: value})}
 							/>
 							<TextInput style={styles.phone}
-								placeholder='Phone'
+								    placeholder='Phone'
+                                    value={this.state.phone}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({phone: value})}
+                                
 							/>
 						</View>
 						<TextInput style={styles.pass}
-							secureTextEntry={true}
-							placeholder='Create Password'
+                                    secureTextEntry={true}
+                                    placeholder='Create Password'
+                                    value={this.state.pass}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({pass: value})}
 						/>
 						<TextInput style={styles.passagain}
-							secureTextEntry={true}
-							placeholder='Enter password again'
+                                    secureTextEntry={true}
+                                    placeholder='Enter password again'
+                                    value={this.state.confirm}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({confirm: value})}
 						/>
 						</View>
 					)}
@@ -170,26 +277,75 @@ class Signup extends Component {
 						<View style={{flexDirection:'row'}}>
 							<TextInput style={styles.firstname}
 									placeholder='First Name'
+                                    value={this.state.firstnameP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({firstnameP: value})}
 							/>
 							<TextInput style={styles.lastname}
-								placeholder='Last Name'
+                                    placeholder='Last Name'
+                                    value={this.state.lastnameP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({lastnameP: value})}
+							/>
+						</View>
+                        <View style={{flexDirection:'row', marginTop: 10}}>
+							<TextInput style={styles.title}
+							        placeholder='Title'
+                                    value={this.state.titleP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({titleP: value})}
+							/>
+							<TextInput style={styles.major}
+								    placeholder='Major or Dept'
+                                    value={this.state.majorP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({majorP: value})}
 							/>
 						</View>
 						<View style={{flexDirection:'row', marginTop: 10}}>
 							<TextInput style={styles.email}
 									placeholder='Email'
+                                    value={this.state.emailP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({emailP: value})}
 							/>
 							<TextInput style={styles.phone}
-								placeholder='Phone'
+								    placeholder='Phone'
+                                    value={this.state.phoneP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({phoneP: value})}
+                                
 							/>
 						</View>
 						<TextInput style={styles.pass}
-							secureTextEntry={true}
-							placeholder='Create Password'
+                                    secureTextEntry={true}
+                                    placeholder='Create Password'
+                                    value={this.state.passP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({passP: value})}
 						/>
 						<TextInput style={styles.passagain}
-							secureTextEntry={true}
-							placeholder='Enter password again'
+                                    secureTextEntry={true}
+                                    placeholder='Enter password again'
+                                    value={this.state.confirmP}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    returnKeyType='done'
+                                    onChangeText={(value)=>this.setState({confirmP: value})}
 						/>
 						</View>
 					)}
@@ -199,12 +355,19 @@ class Signup extends Component {
                 </View>
                 <View style={styles.bottom} key={2}>
                     <TouchableOpacity
-                        onPress={() => Actions.login()}
+                        onPress={() => this.signup()}
                     >
                         <Image source={nextImg}
 							style={styles.next} />   
                     </TouchableOpacity>
                 </View> 
+                {
+					this.state.isBusy &&
+					<ActivityIndicator
+						animating={true}
+						style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, backgroundColor: 'rgba(250,250,250,0.7)'}}
+					/>
+				}
             </View>
 
             

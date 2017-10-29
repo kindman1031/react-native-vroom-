@@ -56,6 +56,7 @@ class Result extends Component {
             pressed_mapRegion: null,
             pressed_lastLat: null,
             pressed_lastLong: null,
+            user: this.props.auth.user,
         }
     }
     onRegionChange(region, lastLat, lastLong) {
@@ -93,7 +94,7 @@ class Result extends Component {
                     
                     <View style={styles.headerInfo} key={1}>
                         <Text style={styles.headerTitle} key={0}>
-                        Welcome passenger
+                        Welcome {this.state.user.fname}
                         </Text>
                     </View>
                 </View>

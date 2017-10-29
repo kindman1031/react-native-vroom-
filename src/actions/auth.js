@@ -1,11 +1,15 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
+import * as firebase from 'firebase';
 
 const {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     SIGNUP_SUCCESS,
+    DEST_SUCCESS,
+    DRIVER_SUCCESS,
+    WATCH_SUCCESS,
 } = require('../lib/constants').default;
 
 
@@ -13,29 +17,39 @@ export function login(email, password, callback) {
     return dispatch => {
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then((res) => {
-          const itemsRef = firebase.database().ref('/users/'+res.uid);
-          
-          itemsRef.once('value', (snap) => {
-            var params = {
-              fullName: snap.val()['profile']['fullname'],
-              address:snap.val()['profile']['address'],
-              phoneNumber: snap.val()['profile']['phoneNumber'],
-              email:snap.val()['profile']['email'],
-              password:snap.val()['profile']['password'],
-              image: snap.val()['profile']['image'],
-              userid: res.uid,
-            };
-              dispatch({
-                type: LOGIN_SUCCESS,
-                payload: { user: params},
-              });
-              Actions.home();
-              callback(); 
+            
+          const itemsRef = firebase.database().ref('/role/'+res.uid);
+          var role="";
+          itemsRef.once('value', (snap) => { 
+            
+              role = snap.val()["role"];
+              if(role == "passenger"){
+                // alert(role);
+                const itemsRef1 = firebase.database().ref('/Passenger/'+res.uid);
+                itemsRef1.once('value', (snap) => { 
+                    var params = {
+                      fname: snap.val()['fname'],
+                      lanme:snap.val()['lname'],
+                      phone: snap.val()['phone'],
+                      email:snap.val()['email'],
+                      userid: res.uid,
+                    };
+                      dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: { user: params},
+                      });
+                      Actions.home();
+                      callback();
+                  });
+              }
+              else{
+                // alert("sdfsdf");
+              }
           });
-          
+
         })
         .catch((error) => {
-          Actions.home();
+          Actions.login();
           callback();
           alert(error);
         })
@@ -55,76 +69,32 @@ export function logout() {
     }
 }
 
-export function signup(email, password, fullName, address, phoneNumber, image, callback) {
+export function signupaspassenger(fname, lname, title, major, email, phone, password, callback) {
     
     return dispatch => {    
         firebase.auth().createUserWithEmailAndPassword(email,password)
         .then((res) => {
-        var imageUrl='default_avatar';
-        if(image.uri!=null){
-            uploadImage(res.uid,image.uri)
-            .then(url => {  
-                imageUrl=url;
-                firebase.database().ref('users/'+res.uid+'/profile').set({
-                    fullname: fullName,
-                    address:address,
-                    phoneNumber: phoneNumber,
-                    email:email,
-                    password:password,
-                    image: imageUrl,
-                });
-                
-                var params = {
-                    fullName: fullName,
-                    address:address,
-                    phoneNumber: phoneNumber,
-                    email:email,
-                    password:password,
-                    image: imageUrl,
-                    userid: res.uid,
-                };
-                dispatch({
-                    type: SIGNUP_SUCCESS,
-                    payload: { user: params},
-                });
-                Actions.home();
-                callback();  
-            })
-            .catch(error => {
-                console.log(error);
-                Actions.home();
-            });
-        }
-        else{
-            firebase.database().ref('users/'+res.uid+'/profile').set({
-                fullname: fullName,
-                address:address,
-                phoneNumber: phoneNumber,
+        
+        
+            firebase.database().ref('Passenger/'+res.uid).set({
+                fname: fname,
+                lname:lname,
+                phone: phone,
                 email:email,
-                password:password,
-                image: imageUrl,
+                majordept:major,
+                title:title,
+            });
+            firebase.database().ref('role/'+res.uid).set({
+                role: "passenger",
             });
             
-            var params = {
-                fullName: fullName,
-                address:address,
-                phoneNumber: phoneNumber,
-                email:email,
-                password:password,
-                image: imageUrl,
-                userid: res.uid,
-            };
-            dispatch({
-                type: SIGNUP_SUCCESS,
-                payload: { user: params},
-            });
-            Actions.home();
+            Actions.login();
             callback(); 
-        }
+        
             
         })
         .catch((error) => {
-            Actions.home();
+            Actions.login();
             callback();
         });
         
@@ -149,5 +119,95 @@ export function sendForgot(email, callback) {
     }
   }
 
+  export function next(destination, callback) {
+    return dispatch => {
+        const itemsRef = firebase.database().ref('/Driver');
+        itemsRef.once('value', (snap) => { 
+            
+            var params = {
+                dest: destination,
+                dirverList:snap.val(),
+            };
+              dispatch({
+                type: DEST_SUCCESS,
+                payload: { dest: params },
+              });
+           
+            Actions.driver();
+            
+            callback();
+        });
+        
+        
+    }
+  }
 
+  export function nexttoWatch(driver, callback) {
+    return dispatch => {
+        const itemsRef = firebase.database().ref('/VRContent');
+        itemsRef.once('value', (snap) => {
+            
+            var params = {
+                sel_driver: driver,
+                watchList:snap.val(),
+            };
+              dispatch({
+                type: DRIVER_SUCCESS,
+                payload: { watch: params },
+              });
+           
+            Actions.watch();
+            
+            callback();
+        });
+        
+        
+    }
+  }
+
+  export function nexttoMusic(watch, callback) {
+    return dispatch => {
+        const itemsRef = firebase.database().ref('/Music');
+        itemsRef.once('value', (snap) => {
+            
+            var params = {
+                sel_watch: watch,
+                musicList:snap.val(),
+            };
+              dispatch({
+                type: WATCH_SUCCESS,
+                payload: { music: params },
+              });
+           
+            Actions.music();
+            
+            callback();
+        });
+        
+        
+    }
+  }
+
+
+  export function nexttoFinal(music, callback) {
+    return dispatch => {
+        const itemsRef = firebase.database().ref('/Music');
+        itemsRef.once('value', (snap) => {
+            
+            var params = {
+                sel_music: music,
+            };
+              dispatch({
+                type: WATCH_SUCCESS,
+                payload: { final: params },
+              });
+           
+            Actions.result();
+            
+            callback();
+        });
+        
+        
+    }
+  }
 

@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
     TouchableHighlight,
+    ActivityIndicator
 } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -53,7 +54,58 @@ class Watch extends Component {
         super(props, context);
         this.state = {
           selected: -1,
+          user: this.props.auth.user,
+          watchList: this.props.auth.watch.watchList, 
+          isBusy: false, 
         };
+    }
+    next() {
+		if(this.state.selected==-1){			
+			alert("Please select your watch");
+		}
+		else{
+            this.props.actions.Auth.nexttoMusic(this.state.selected, () => {
+				this.setState({isBusy: false});
+			})
+		}
+		
+      }
+    renderWatchList() {
+        var list = [];
+        
+        _.map(this.state.watchList, (obj, key) => {
+            var list_Star = [];
+            for (var i = 0; i < obj.ratings; i++) {
+                list_Star.push(
+                    <Image source={ starImg } style={styles.star} key={i} />
+                )
+            }
+            list.push(
+                <View style={styles.driverinfoP} key={key}>
+                    <TouchableOpacity
+                            onPress={() => this.setState({selected:key})}
+                        >
+                        <View style={styles.driverinfo}>
+                        
+                            <Image style={styles.listItemImage} />
+                            <View style={[styles.listItemInfo, {backgroundColor: this.state.selected == key ?'yellow' :'white'}]}>
+                                <Text style={styles.listItemJob}>{obj.title}</Text>
+                                <Text style={styles.listItemMail}>{obj.description}</Text>
+                                
+                                <View style={{flexDirection:'row'}}>
+                                    {list_Star}
+                                </View>
+                            </View>
+                            
+                        </View>
+                    </TouchableOpacity> 
+                    <View style={styles.line}>
+                    </View>
+                </View>
+            )
+            
+        })
+        return list;
     }
     render() {
 
@@ -66,7 +118,7 @@ class Watch extends Component {
                     
                     <View style={styles.headerInfo} key={1}>
                         <Text style={styles.headerTitle} key={0}>
-                        Welcome passenger
+                        Welcome {this.state.user.fname}
                         </Text>
                     </View>
                 </View>
@@ -86,33 +138,11 @@ class Watch extends Component {
                     <View style={styles.line}>
                     </View>
                     <ScrollView style={styles.scroll}>
-                        {menuItems.map((item, idx) => (
-                            <View style={styles.driverinfoP} key={idx}>
-                                <TouchableOpacity
-                                        onPress={() => this.setState({selected:idx})}
-                                    >
-                                    <View style={styles.driverinfo}>
-                                    
-                                        <Image source={{ uri: item.thumb}} style={styles.listItemImage} />
-                                        <View style={[styles.listItemInfo, {backgroundColor: this.state.selected == idx ?'yellow' :'white'}]}>
-                                            <Text style={styles.listItemJob}>The blue</Text>
-                                            <Text style={styles.listItemMail}>p.hawkins2016</Text>
-                                            <View style={{flexDirection:'row'}}>
-                                                <Image source={ starImg } style={styles.star} />
-                                                <Image source={ starImg } style={styles.star} />
-                                                <Image source={ starImg } style={styles.star} />
-                                                <Image source={ starImg } style={styles.star} />
-                                                <Image source={ starImg } style={styles.star} />
-                                            </View>
-                                        </View>
-                                        
-                                    </View>
-                                </TouchableOpacity> 
-                                <View style={styles.line}>
-                                </View>
-                            </View>
-                        
-                        ))}
+                        {
+                            // console.log("asd",this.state.driverList)
+                            
+                            this.renderWatchList()
+                        }
                     </ScrollView>
                     <TouchableOpacity
                             onPress={() => this.setState({selected:-2})}
@@ -127,12 +157,19 @@ class Watch extends Component {
                 </View>
                 <View style={styles.bottom} key={2}>
                     <TouchableOpacity
-                        onPress={() => Actions.music()}
+                        onPress={() => this.next()}
                     >
                         <Image source={nextImg}
 							style={styles.next} />   
                     </TouchableOpacity>
                 </View> 
+                {
+					this.state.isBusy &&
+					<ActivityIndicator
+						animating={true}
+						style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, backgroundColor: 'rgba(250,250,250,0.7)'}}
+					/>
+				}
             </View>
 
             

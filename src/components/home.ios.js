@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
     TouchableHighlight,
+    ActivityIndicator
 } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -51,12 +52,15 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: this.props.auth.user,
             mapRegion: null,
             lastLat: null,
             lastLong: null,
             pressed_mapRegion: null,
             pressed_lastLat: null,
             pressed_lastLong: null,
+            destination: '',
+            isBusy: false,
         }
     }
     onRegionChange(region, lastLat, lastLong) {
@@ -95,6 +99,18 @@ class Home extends Component {
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
     }
+
+    next() {
+		if(this.state.destination==null || this.state.destination==''){			
+			alert("Please enter your destination");
+		}
+		else{
+            this.props.actions.Auth.next(this.state.destination, () => {
+				this.setState({isBusy: false});
+			})
+		}
+		
+	  }
     render() {
 
         return (
@@ -107,7 +123,7 @@ class Home extends Component {
                     <View style={styles.headerInfo} key={1}>
                         
                         <Text style={styles.headerTitle} key={0}>
-                        Welcome passenger
+                        Welcome {this.state.user.fname}
                         </Text>
                     </View>
                 </View>
@@ -116,7 +132,15 @@ class Home extends Component {
                         <View style={styles.vrsoundtitle}>
                             <Image source={carImg}
                                 style={styles.inlineImgCar} />
-                            <TextInput style={styles.choice} placeholder='Where are you going?'></TextInput>
+                            <TextInput style={styles.choice}
+                                placeholder='Where are you going?'
+                                value={this.state.username}
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                returnKeyType='done'
+                                onChangeText={(value)=>this.setState({destination: value})}
+                            />
+                            
                         </View>
                         <View style={styles.line}>
                         </View>  
@@ -152,12 +176,19 @@ class Home extends Component {
                 </View>
                 <View style={styles.bottom} key={2}>
                     <TouchableOpacity
-                        onPress={() => Actions.driver()}
+                        onPress={() => this.next()}
                     >
                         <Image source={nextImg}
 							style={styles.next} />   
                     </TouchableOpacity>
                 </View> 
+                {
+					this.state.isBusy &&
+					<ActivityIndicator
+						animating={true}
+						style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, backgroundColor: 'rgba(250,250,250,0.7)'}}
+					/>
+				}
             </View>
 
             

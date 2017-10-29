@@ -47,8 +47,8 @@ class Login extends Component {
 	
 		this.state = {
 			isBusy: false,
-		  	username: '',
-		  	password: '',
+		  	username: 'larsson@gmail.com',
+		  	password: 'Abc1203$',
 		}
 	  }
 	
@@ -57,23 +57,21 @@ class Login extends Component {
 	  }
 	
 	  login(email, password) {
-		Actions.home();
-		// if(email==null || email==''){			
-		// 	alert("email is required");
-		// }
-		// else if(password==null || password==''){			
-		// 	alert("Password is required");
-		// }
-		// else if(password.length<6){
-		// 	alert("Password must be at least 6 characters");
-		// }		
-		// else{
-		// 	Actions.home();
-		// 	// this.setState({isBusy:true});
-		// 	// this.props.actions.Auth.login(email, password, () => {
-		// 	// 	this.setState({isBusy: false});
-		// 	// })
-		// }
+		if(email==null || email==''){			
+			alert("email is required");
+		}
+		else if(password==null || password==''){			
+			alert("Password is required");
+		}
+		else if(password.length<6){
+			alert("Password must be at least 6 characters");
+		}		
+		else{
+			this.setState({isBusy:true});
+			this.props.actions.Auth.login(email, password, () => {
+				this.setState({isBusy: false});
+			})
+		}
 		
 	  }
 
@@ -89,6 +87,11 @@ class Login extends Component {
 					
 						<TextInput style={styles.email}
 							placeholder='Email'
+							value={this.state.username}
+							autoCapitalize='none'
+							autoCorrect={false}
+							returnKeyType='done'
+							onChangeText={(value)=>this.setState({username: value})}
 						/>
 				
 					
@@ -96,6 +99,11 @@ class Login extends Component {
 						<TextInput style={styles.pass}
 							secureTextEntry={true}
 							placeholder='Password'
+							value={this.state.password}
+							autoCapitalize='none'
+							autoCorrect={false}
+							returnKeyType='done'
+							onChangeText={(value)=>this.setState({password: value})}
 						/>
 					
 					
