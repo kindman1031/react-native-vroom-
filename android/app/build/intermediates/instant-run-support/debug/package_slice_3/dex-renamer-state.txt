@@ -1,0 +1,4 @@
+#Wed Nov 08 04:25:26 ICT 2017
+base.0=/Users/crazydev/Desktop/vroom/android/app/build/intermediates/transforms/dexMerger/debug/22
+renamed.0=classes.dex
+file.0=/Users/crazydev/Desktop/vroom/android/app/build/intermediates/transforms/dexMerger/debug/22/classes.dex
