@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -42,6 +43,15 @@
 		5CCB88E8941D8DB264BE7F4C /* libPods-startup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF667B5AC1B836D1C6A9E338 /* libPods-startup.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		73019903D3B04E0B95D8671B /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA02F79ABF414DD7A17BF96D /* libAirMaps.a */; };
+		8249C5711FB83EDC00DD0C1F /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C5701FB83EDC00DD0C1F /* splash.png */; };
+		8249C5731FB8419400DD0C1F /* vr40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C5721FB8419400DD0C1F /* vr40.png */; };
+		8249C5751FB841A500DD0C1F /* vr58.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C5741FB841A500DD0C1F /* vr58.png */; };
+		8249C5771FB841AC00DD0C1F /* vr60.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C5761FB841AC00DD0C1F /* vr60.png */; };
+		8249C5791FB841B400DD0C1F /* vr80.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C5781FB841B400DD0C1F /* vr80.png */; };
+		8249C57B1FB841BA00DD0C1F /* vr87.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C57A1FB841BA00DD0C1F /* vr87.png */; };
+		8249C57D1FB841BF00DD0C1F /* vr120.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C57C1FB841BF00DD0C1F /* vr120.png */; };
+		8249C57F1FB841C400DD0C1F /* vr180.png in Resources */ = {isa = PBXBuildFile; fileRef = 8249C57E1FB841C400DD0C1F /* vr180.png */; };
+		8249C5811FB85F5700DD0C1F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8249C5801FB85F5700DD0C1F /* StoreKit.framework */; };
 		82F149581FA47E4E00E9E951 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82F149571FA47E4E00E9E951 /* GoogleService-Info.plist */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		93436A35F6B94F5C90CFC5BB /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1421F29DA2B44FBDBA6089D9 /* libRNImagePicker.a */; };
@@ -338,6 +348,15 @@
 		6ECD7422B6334BBD9ED03FBC /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		701780B43AAF43098395D012 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		8249C5701FB83EDC00DD0C1F /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		8249C5721FB8419400DD0C1F /* vr40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr40.png; sourceTree = "<group>"; };
+		8249C5741FB841A500DD0C1F /* vr58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr58.png; sourceTree = "<group>"; };
+		8249C5761FB841AC00DD0C1F /* vr60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr60.png; sourceTree = "<group>"; };
+		8249C5781FB841B400DD0C1F /* vr80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr80.png; sourceTree = "<group>"; };
+		8249C57A1FB841BA00DD0C1F /* vr87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr87.png; sourceTree = "<group>"; };
+		8249C57C1FB841BF00DD0C1F /* vr120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr120.png; sourceTree = "<group>"; };
+		8249C57E1FB841C400DD0C1F /* vr180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vr180.png; sourceTree = "<group>"; };
+		8249C5801FB85F5700DD0C1F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		82F149571FA47E4E00E9E951 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		83FB95D5B8E4BA9FB4DA90B0 /* libPods-startup-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-startup-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,6 +390,7 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				8249C5811FB85F5700DD0C1F /* StoreKit.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
@@ -493,6 +513,14 @@
 		13B07FAE1A68108700A75B9A /* startup */ = {
 			isa = PBXGroup;
 			children = (
+				8249C5701FB83EDC00DD0C1F /* splash.png */,
+				8249C5721FB8419400DD0C1F /* vr40.png */,
+				8249C5741FB841A500DD0C1F /* vr58.png */,
+				8249C5761FB841AC00DD0C1F /* vr60.png */,
+				8249C5781FB841B400DD0C1F /* vr80.png */,
+				8249C57C1FB841BF00DD0C1F /* vr120.png */,
+				8249C57E1FB841C400DD0C1F /* vr180.png */,
+				8249C57A1FB841BA00DD0C1F /* vr87.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -544,6 +572,7 @@
 		7C70718143A19A29ADCD5930 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8249C5801FB85F5700DD0C1F /* StoreKit.framework */,
 				FF667B5AC1B836D1C6A9E338 /* libPods-startup.a */,
 				83FB95D5B8E4BA9FB4DA90B0 /* libPods-startup-tvOS.a */,
 				6B5EF357E4767F6D59656857 /* libPods-startup-tvOSTests.a */,
@@ -765,6 +794,15 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 4ZHVVJT744;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1097,12 +1135,20 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				8249C5751FB841A500DD0C1F /* vr58.png in Resources */,
 				27FD05A053544C9EAB39F9AE /* Entypo.ttf in Resources */,
 				B01C519712B84DE39FCAA1E7 /* EvilIcons.ttf in Resources */,
+				8249C5711FB83EDC00DD0C1F /* splash.png in Resources */,
+				8249C57D1FB841BF00DD0C1F /* vr120.png in Resources */,
+				8249C57B1FB841BA00DD0C1F /* vr87.png in Resources */,
 				542D251EFF7E4294835B0812 /* FontAwesome.ttf in Resources */,
 				B272027FFA0D42EFA5B39166 /* Foundation.ttf in Resources */,
+				8249C5731FB8419400DD0C1F /* vr40.png in Resources */,
 				F46FC354BDC04F1C85D4A008 /* Ionicons.ttf in Resources */,
 				46CF59B18DBC42B49F046400 /* MaterialCommunityIcons.ttf in Resources */,
+				8249C57F1FB841C400DD0C1F /* vr180.png in Resources */,
+				8249C5771FB841AC00DD0C1F /* vr60.png in Resources */,
+				8249C5791FB841B400DD0C1F /* vr80.png in Resources */,
 				43B1B779C65D423E847BC3B8 /* MaterialIcons.ttf in Resources */,
 				A9DF2C1A289B49FAA2449DC0 /* Octicons.ttf in Resources */,
 				C1B0740F3EC84A2B94139781 /* SimpleLineIcons.ttf in Resources */,
@@ -1433,9 +1479,7 @@
 				INFOPLIST_FILE = startupTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1461,9 +1505,7 @@
 				INFOPLIST_FILE = startupTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1479,8 +1521,11 @@
 			baseConfigurationReference = 27EF3BCA7AE9BC8AA598279C /* Pods-startup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 4ZHVVJT744;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1496,6 +1541,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vroom.stephan;
 				PRODUCT_NAME = startup;
+				PROVISIONING_PROFILE = "f2f83014-961e-4319-ac52-b5ebc991a7d3";
+				PROVISIONING_PROFILE_SPECIFIER = vrrom;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1505,7 +1552,10 @@
 			baseConfigurationReference = 3199D6C4420AF216345828CE /* Pods-startup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4ZHVVJT744;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1521,6 +1571,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vroom.stephan;
 				PRODUCT_NAME = startup;
+				PROVISIONING_PROFILE = "f2f83014-961e-4319-ac52-b5ebc991a7d3";
+				PROVISIONING_PROFILE_SPECIFIER = vrrom;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1546,9 +1598,7 @@
 				);
 				INFOPLIST_FILE = "startup-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1583,9 +1633,7 @@
 				);
 				INFOPLIST_FILE = "startup-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1613,9 +1661,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "startup-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.startup-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1638,9 +1684,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "startup-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.startup-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

@@ -14,6 +14,7 @@ import Music from './components/music';
 import Watch from './components/watch';
 import Result from './components/result';
 import DriverHome from './components/driverHome';
+import DriverAppHome from './components/driver_home';
 
 import * as firebase from 'firebase';
 import config from './lib/config';
@@ -60,6 +61,7 @@ export default class popuppin extends Component {
                     <Scene key="watch" component={Watch} hideNavBar={true}/>
                     <Scene key="signup" component={Signup} hideNavBar={true} />
                     <Scene key="music" component={Music} hideNavBar={true} />
+                    <Scene key="driver_home" component={DriverAppHome} hideNavBar={true} />
                     
                 </Scene>
             </Router>

@@ -47,8 +47,8 @@ class Login extends Component {
 	
 		this.state = {
 			isBusy: false,
-		  	username: 'larsson@gmail.com',
-		  	password: 'Abc1203$',
+		  	username: '',
+		  	password: '',
 		}
 	  }
 	

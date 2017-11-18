@@ -73,6 +73,7 @@ class Driver extends Component {
         var list = [];
         var i=0;
         _.map(this.state.driverList, (obj, key) => {
+            
             list.push(
                 <View style={styles.driverinfoP} key={key}>
                     <TouchableOpacity
@@ -97,6 +98,24 @@ class Driver extends Component {
             )
             
         })
+        if(list.length==0){
+            list.push(
+                <View style={styles.driverinfoP} >
+                    
+                        <View style={styles.driverinfo}>
+                        
+                            
+                            <View style={[styles.listItemInfo, {backgroundColor: 'yellow'}]}>
+                                <Text style={styles.listItemName}>No drivers at this time</Text>
+                                
+                            </View>
+                            
+                        </View>
+                    
+                    
+                </View>
+            )
+        }
         return list;
     }
     render() {

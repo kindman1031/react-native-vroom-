@@ -1,6 +1,7 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import * as firebase from 'firebase';
+import _ from 'lodash';
 
 const {
     LOGIN_REQUEST,
@@ -24,7 +25,6 @@ export function login(email, password, callback) {
             
               role = snap.val()["role"];
               if(role == "passenger"){
-                // alert(role);
                 const itemsRef1 = firebase.database().ref('/Passenger/'+res.uid);
                 itemsRef1.once('value', (snap) => { 
                     var params = {
@@ -38,13 +38,23 @@ export function login(email, password, callback) {
                         type: LOGIN_SUCCESS,
                         payload: { user: params},
                       });
-                      Actions.home();
-                      callback();
+                      
+                      
                   });
+                Actions.home();
+                callback();
               }
               else{
-                // alert("sdfsdf");
+                firebase.database().ref('role/'+res.uid).set({
+                    role: "driver",
+                    flag: "signin",
+                });
+                Actions.driver_home();
+                callback();
               }
+                // alert(role);
+                
+              
           });
 
         })
@@ -69,24 +79,40 @@ export function logout() {
     }
 }
 
-export function signupaspassenger(fname, lname, title, major, email, phone, password, callback) {
+export function signup(fname, lname, title, major, email, phone, password, role, callback) {
     
     return dispatch => {    
         firebase.auth().createUserWithEmailAndPassword(email,password)
         .then((res) => {
         
-        
-            firebase.database().ref('Passenger/'+res.uid).set({
-                fname: fname,
-                lname:lname,
-                phone: phone,
-                email:email,
-                majordept:major,
-                title:title,
-            });
-            firebase.database().ref('role/'+res.uid).set({
-                role: "passenger",
-            });
+            if(role == "Driver"){
+                firebase.database().ref('Driver/'+res.uid).set({
+                    fname: fname,
+                    lname:lname,
+                    phone: phone,
+                    email:email,
+                    majordept:major,
+                    title:title,
+                });
+                firebase.database().ref('role/'+res.uid).set({
+                    role: "driver",
+                    flag: "not",
+                });
+            }
+            else{
+                firebase.database().ref('Passenger/'+res.uid).set({
+                    fname: fname,
+                    lname:lname,
+                    phone: phone,
+                    email:email,
+                    majordept:major,
+                    title:title,
+                });
+                firebase.database().ref('role/'+res.uid).set({
+                    role: "passenger",
+                });
+            }
+            
             
             Actions.login();
             callback(); 
@@ -121,22 +147,52 @@ export function sendForgot(email, callback) {
 
   export function next(destination, callback) {
     return dispatch => {
-        const itemsRef = firebase.database().ref('/Driver');
+        const itemsRef = firebase.database().ref('/role');
         itemsRef.once('value', (snap) => { 
-            
-            var params = {
-                dest: destination,
-                dirverList:snap.val(),
-            };
-              dispatch({
-                type: DEST_SUCCESS,
-                payload: { dest: params },
-              });
-           
-            Actions.driver();
-            
-            callback();
+            var roleLi = snap.val();
+            var keyLi = [];
+            _.map(roleLi, (obj, key) => {
+                
+                if(obj.flag == "signin"){
+                    keyLi.push(key);
+                }
+                
+            })
+
+            const itemsRef1 = firebase.database().ref('/Driver');
+            itemsRef1.once('value', (snap) => { 
+                let ddLi = snap.val();
+                var driverLi = {}
+                _.map(ddLi, (obj1, key1) => {
+                    
+                    keyLi.forEach(function(element) {
+                        if(key1==element){
+                            
+                            driverLi[key1] = obj1;
+                            
+                        }
+                    }, this);
+                    
+                })
+
+                // console.log("ttttttt",driverLi);
+    
+                var params = {
+                    dest: destination,
+                    dirverList:driverLi,
+                };
+                  dispatch({
+                    type: DEST_SUCCESS,
+                    payload: { dest: params },
+                  });
+               
+                Actions.driver();
+                
+                callback();
+            });
+
         });
+        
         
         
     }

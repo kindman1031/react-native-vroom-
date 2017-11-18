@@ -87,7 +87,7 @@ class Watch extends Component {
                         >
                         <View style={styles.driverinfo}>
                         
-                            <Image style={styles.listItemImage} />
+                            <Image source={{ uri: obj.image}} style={styles.listItemImage} />
                             <View style={[styles.listItemInfo, {backgroundColor: this.state.selected == key ?'yellow' :'white'}]}>
                                 <Text style={styles.listItemJob}>{obj.title}</Text>
                                 <Text style={styles.listItemMail}>{obj.description}</Text>

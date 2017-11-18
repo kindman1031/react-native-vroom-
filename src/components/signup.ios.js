@@ -10,7 +10,8 @@ import {
     TouchableOpacity,
     View,
     TouchableHighlight,
-    ActivityIndicator
+    ActivityIndicator,
+    KeyboardAvoidingView
 } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -81,7 +82,7 @@ class Signup extends Component {
 	}
 	
     signup() {
-        if(this.state.role=="Passenger"){
+        
             if(this.state.emailP==null || this.state.emailP==''){			
                 alert("email is required");
             }
@@ -111,15 +112,12 @@ class Signup extends Component {
             }		
             else{
                 this.setState({isBusy:true});
-                this.props.actions.Auth.signupaspassenger(this.state.firstnameP, this.state.lastnameP, this.state.titleP, this.state.majorP, this.state.emailP, this.state.phoneP, this.state.passP, () => {
+                this.props.actions.Auth.signup(this.state.firstnameP, this.state.lastnameP, this.state.titleP, this.state.majorP, this.state.emailP, this.state.phoneP, this.state.passP, this.state.role, () => {
                     this.setState({isBusy: false});
                     alert("success");
                 })
             }
-        }
-        else{
-
-        }
+        
         
     
     }
@@ -193,8 +191,8 @@ class Signup extends Component {
 					</View>
 				</TouchableOpacity>
 
-                <View style={styles.content} key={1}>
-					{this.state.selected == 1 && (
+                <KeyboardAvoidingView behavior='padding' style={styles.content} key={1}>
+					
 						<View>
 						<View style={{flexDirection:'row'}}>
 							<TextInput style={styles.firstname}
@@ -203,89 +201,11 @@ class Signup extends Component {
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({firstname: value})}
-							/>
-							<TextInput style={styles.lastname}
-                                    placeholder='Last Name'
-                                    value={this.state.lastname}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({lastname: value})}
-							/>
-						</View>
-                        <View style={{flexDirection:'row', marginTop: 10}}>
-							<TextInput style={styles.title}
-							        placeholder='Title'
-                                    value={this.state.title}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({title: value})}
-							/>
-							<TextInput style={styles.major}
-								    placeholder='Major or Dept'
-                                    value={this.state.major}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({major: value})}
-							/>
-						</View>
-						<View style={{flexDirection:'row', marginTop: 10}}>
-							<TextInput style={styles.email}
-									placeholder='Email'
-                                    value={this.state.email}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({email: value})}
-							/>
-							<TextInput style={styles.phone}
-								    placeholder='Phone'
-                                    value={this.state.phone}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({phone: value})}
-                                
-							/>
-						</View>
-						<TextInput style={styles.pass}
-                                    secureTextEntry={true}
-                                    placeholder='Create Password'
-                                    value={this.state.pass}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({pass: value})}
-						/>
-						<TextInput style={styles.passagain}
-                                    secureTextEntry={true}
-                                    placeholder='Enter password again'
-                                    value={this.state.confirm}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
-                                    onChangeText={(value)=>this.setState({confirm: value})}
-						/>
-						</View>
-					)}
-
-					{this.state.selected == 2 && (
-						<View>
-						<View style={{flexDirection:'row'}}>
-							<TextInput style={styles.firstname}
-									placeholder='First Name'
-                                    value={this.state.firstnameP}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    returnKeyType='done'
                                     onChangeText={(value)=>this.setState({firstnameP: value})}
 							/>
 							<TextInput style={styles.lastname}
                                     placeholder='Last Name'
-                                    value={this.state.lastnameP}
+                                    value={this.state.lastname}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -295,7 +215,7 @@ class Signup extends Component {
                         <View style={{flexDirection:'row', marginTop: 10}}>
 							<TextInput style={styles.title}
 							        placeholder='Title'
-                                    value={this.state.titleP}
+                                    value={this.state.title}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -303,7 +223,7 @@ class Signup extends Component {
 							/>
 							<TextInput style={styles.major}
 								    placeholder='Major or Dept'
-                                    value={this.state.majorP}
+                                    value={this.state.major}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -313,7 +233,7 @@ class Signup extends Component {
 						<View style={{flexDirection:'row', marginTop: 10}}>
 							<TextInput style={styles.email}
 									placeholder='Email'
-                                    value={this.state.emailP}
+                                    value={this.state.email}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -321,7 +241,7 @@ class Signup extends Component {
 							/>
 							<TextInput style={styles.phone}
 								    placeholder='Phone'
-                                    value={this.state.phoneP}
+                                    value={this.state.phone}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -332,7 +252,7 @@ class Signup extends Component {
 						<TextInput style={styles.pass}
                                     secureTextEntry={true}
                                     placeholder='Create Password'
-                                    value={this.state.passP}
+                                    value={this.state.pass}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
@@ -341,18 +261,20 @@ class Signup extends Component {
 						<TextInput style={styles.passagain}
                                     secureTextEntry={true}
                                     placeholder='Enter password again'
-                                    value={this.state.confirmP}
+                                    value={this.state.confirm}
                                     autoCapitalize='none'
                                     autoCorrect={false}
                                     returnKeyType='done'
                                     onChangeText={(value)=>this.setState({confirmP: value})}
 						/>
 						</View>
-					)}
+					
+
+					
 						
                     
                     
-                </View>
+                </KeyboardAvoidingView>
                 <View style={styles.bottom} key={2}>
                     <TouchableOpacity
                         onPress={() => this.signup()}
@@ -551,47 +473,47 @@ class Signup extends Component {
 	},
 	firstname: {
         width: DEVICE_WIDTH*0.4,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
 		borderColor: '#ff9300',
 		marginRight: 10,
 	},
 	lastname: {
         width: DEVICE_WIDTH*0.4,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
         borderColor: '#ff9300',
 	},
 	title: {
         width: DEVICE_WIDTH*0.2,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
 		borderColor: '#ff9300',
 		marginRight: 10,
 	},
 	major: {
         width: DEVICE_WIDTH*0.6,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
         borderColor: '#ff9300',
 	},
 	email: {
         width: DEVICE_WIDTH*0.5,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
 		borderColor: '#ff9300',
 		marginRight: 10,
 	},
 	phone: {
         width: DEVICE_WIDTH*0.3,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
         borderColor: '#ff9300',
 	},
 	pass: {
 		marginTop: 10,
         width: DEVICE_WIDTH*0.6,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
 		borderColor: '#ff9300',
 		alignSelf: 'flex-start'
@@ -599,7 +521,7 @@ class Signup extends Component {
 	passagain: {
 		marginTop: 10,
         width: DEVICE_WIDTH*0.7,
-		height: 40,
+		height: 35,
 		borderWidth: 1,
 		borderColor: '#ff9300',
 		alignSelf: 'flex-start'
